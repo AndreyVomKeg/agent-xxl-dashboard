@@ -48,7 +48,7 @@ export default function RightPanel() {
 
   return (
     <div style={{
-      width: 380, borderLeft: "1px solid " + C.bd,
+      width: 520, borderLeft: "1px solid " + C.bd,
       display: "flex", flexDirection: "column", background: C.sf,
       boxShadow: "-8px 0 32px rgba(60,40,20,0.08), -2px 0 8px rgba(60,40,20,0.04)",
       zIndex: 10, position: "relative",
