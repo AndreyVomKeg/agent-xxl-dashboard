@@ -1,36 +1,63 @@
-import { ChevronDown } from "lucide-react";
-import { C, G } from "../../styles/theme";
+import { File } from "lucide-react";
+import { G, C } from "../../styles/theme";
 
-const agentMeta = {
-  analyst:    { emoji: "📊", label: "Аналитик",    color: G.b },
-  copywriter: { emoji: "✏️",  label: "Копирайтер", color: G.g },
-  optimizer:  { emoji: "⚙️",  label: "Оптимизатор", color: G.o },
-  auditor:    { emoji: "🛡️", label: "Аудитор",    color: G.r },
-};
-
-export function Badge({ agent }) {
-  const m = agentMeta[agent] || {};
+// Agent badge with color
+export const Badge = ({ agent }) => {
+  const colors = {
+    "Аналитик": G.b,
+    "Оптимизатор": G.g,
+    "Копирайтер": "#D09D00",
+    "Аудитор": G.r,
+  };
+  const co = colors[agent] || G.b;
   return (
     <span style={{
-      fontSize: 13, fontWeight: 500, padding: "3px 8px", borderRadius: 8,
-      background: (m.color || "#999") + "15", color: m.color || "#999",
-      display: "inline-flex", alignItems: "center", gap: 4,
+      fontSize: 13, fontWeight: 500, padding: "3px 10px",
+      borderRadius: 20, background: co + "18", color: co,
     }}>
-      {m.emoji} {m.label}
+      {agent}
     </span>
   );
-}
+};
 
-export function Chevron({ open }) {
+// Status dot with label
+export const StatusDot = ({ status }) => {
+  const colors = { working: G.g, idle: C.tt, alert: G.r };
+  const labels = { working: "Работает", idle: "Ожидает", alert: "Внимание" };
   return (
-    <ChevronDown
-      size={16}
-      style={{
-        color: C.tt,
-        transform: open ? "rotate(180deg)" : "rotate(0deg)",
-        transition: "transform 0.2s",
-        flexShrink: 0,
-      }}
-    />
+    <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+      <div style={{
+        width: 8, height: 8, borderRadius: "50%",
+        background: colors[status],
+        animation: status === "working" ? "pulse 2s infinite" : "none",
+      }} />
+      <span style={{ fontSize: 14, fontWeight: 500, color: colors[status] }}>
+        {labels[status]}
+      </span>
+    </div>
   );
-}
+};
+
+// Chevron arrow
+export const Chevron = ({ open }) => (
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
+    style={{ transform: open ? "rotate(90deg)" : "none", transition: "transform 0.2s", flexShrink: 0 }}>
+    <path d="M6 4L10 8L6 12" stroke={C.ts} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
+// File type icon
+export const FileIcon = ({ type }) => {
+  const colors = { pdf: G.r, md: G.b, txt: C.ts, json: G.g };
+  const co = colors[type] || C.tt;
+  return (
+    <div style={{
+      width: 32, height: 32, borderRadius: 8,
+      background: co + "12",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      flexShrink: 0,
+    }}>
+      <File size={14} style={{ color: co }} />
+    </div>
+  );
+};

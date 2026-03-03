@@ -156,47 +156,64 @@ export default function Campaigns({ camps, setCamps, onNewCampaign }) {
 
                   {/* STRUCTURE sub-tab */}
                   {subTab === "structure" && d && (
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
                       <div>
-                        <div style={{ fontSize: 15, fontWeight: 600, marginBottom: 12 }}>Группы объявлений</div>
-                        {d.adGroups.map((ag, j) => (
-                          <div key={j} style={{ background: C.bg, borderRadius: 10, padding: 12, marginBottom: 8, border: "1px solid " + C.bd }}>
-                            <div style={{ fontSize: 15, fontWeight: 500 }}>{ag.name}</div>
-                            <div style={{ fontSize: 13, color: C.tt, marginTop: 4 }}>{ag.keywords.length} ключевых слов · {ag.ads} объявлений</div>
-                            <div style={{ display: "flex", flexWrap: "wrap", gap: 4, marginTop: 6 }}>
-                              {ag.keywords.map((kw, k) => (
-                                <span key={k} style={{ fontSize: 12, padding: "2px 7px", borderRadius: 6, background: C.sa, color: C.ts }}>{kw}</span>
-                              ))}
+                        <div style={{ fontSize: 14, fontWeight: 500, color: C.tt, marginBottom: 8 }}>КЛЮЧЕВЫЕ СЛОВА</div>
+                        {d.kw.map((k, j) => (
+                          <div key={j} style={{
+                            display: "flex", justifyContent: "space-between",
+                            padding: "8px 10px", borderRadius: 8, marginBottom: 4,
+                            border: "1px solid " + (k.qs < 5 ? "rgba(234,67,53,0.12)" : C.bd),
+                            background: k.qs < 5 ? "rgba(234,67,53,0.03)" : "transparent",
+                          }}>
+                            <div>
+                              <div style={{ fontSize: 15, fontWeight: 500 }}>{k.w}</div>
+                              <div style={{ fontSize: 13, color: C.tt }}>
+                                {k.m} · QS <span style={{ color: k.qs >= 7 ? G.g : k.qs >= 5 ? "#D09D00" : G.r }}>{k.qs}</span>/10
+                              </div>
+                            </div>
+                            <div style={{ textAlign: "right", fontSize: 14 }}>
+                              <div>CTR {k.ctr}%</div>
+                              <div style={{ color: cpaColor(k.cpa) }}>CPA {k.cpa}₽</div>
                             </div>
                           </div>
                         ))}
                       </div>
                       <div>
-                        <div style={{ fontSize: 15, fontWeight: 600, marginBottom: 12 }}>Агентские рекомендации</div>
-                        {d.recommendations.map((r, j) => (
-                          <div key={j} style={{ fontSize: 14, color: C.ts, padding: "8px 12px", borderRadius: 8, background: C.bg, marginBottom: 6, border: "1px solid " + C.bd }}>
-                            {r}
+                        <div style={{ fontSize: 14, fontWeight: 500, color: C.tt, marginBottom: 8 }}>ОБЪЯВЛЕНИЯ</div>
+                        {d.ads.map((a, j) => (
+                          <div key={j} style={{ padding: "8px 10px", borderRadius: 8, marginBottom: 4, border: "1px solid " + C.bd }}>
+                            <div style={{ fontSize: 15, fontWeight: 500, color: G.b }}>{a.t}</div>
+                            <div style={{ fontSize: 13, color: C.tt }}>
+                              CTR {a.ctr}% · {a.cv} конв. ·{" "}
+                              <span style={{ color: a.st === "testing" ? "#D09D00" : G.g }}>
+                                {a.st === "testing" ? "A/B тест" : "Активно"}
+                              </span>
+                            </div>
                           </div>
                         ))}
                       </div>
+                    </div>
+                  )}
+                  {subTab === "structure" && !d && (
+                    <div style={{ textAlign: "center", padding: 20, color: C.tt, fontSize: 15 }}>
+                      {c.s === "draft" ? "Структура будет сгенерирована агентами при запуске" : "Данные загружаются из Google Ads API..."}
                     </div>
                   )}
 
                   {/* AGENT LOG sub-tab */}
                   {subTab === "agentlog" && (
                     <div>
-                      {[
-                        { ag: "analyst", t: "10 мин", msg: "Анализ CPA: текущий CPA " + c.cpa + "₽. Целевой: 300₽. Рекомендую перераспределить бюджет." },
-                        { ag: "copywriter", t: "25 мин", msg: "Генерация 3 RSA-объявлений завершена. Лучший прогноз CTR: 6.2%." },
-                        { ag: "optimizer", t: "1 ч", msg: "Ставки скорректированы: +8% для высококонвертирующих слов." },
-                        { ag: "auditor", t: "2 ч", msg: "Чеклист пройден. 3 минус-слова добавлено." },
-                      ].map((lg, j) => (
-                        <div key={j} style={{ display: "flex", gap: 12, padding: "10px 0", borderBottom: "1px solid " + C.bd }}>
-                          <Badge agent={lg.ag} />
-                          <div style={{ flex: 1 }}>
-                            <div style={{ fontSize: 14, color: C.ts }}>{lg.msg}</div>
-                            <div style={{ fontSize: 13, color: C.tt, marginTop: 3 }}>{lg.t} назад</div>
-                          </div>
+                      <div style={{ fontSize: 14, fontWeight: 500, color: C.tt, marginBottom: 10 }}>ДЕЙСТВИЯ АГЕНТОВ</div>
+                      {(c.agActs || []).map((a, j) => (
+                        <div key={j} style={{
+                          display: "flex", alignItems: "center", gap: 10,
+                          padding: "10px 12px", borderRadius: 10, marginBottom: 6,
+                          border: "1px solid " + C.bd,
+                        }}>
+                          <Badge agent={a.ag} />
+                          <div style={{ flex: 1, fontSize: 15 }}>{a.x}</div>
+                          <span style={{ fontSize: 13, color: C.tt }}>{a.t}</span>
                         </div>
                       ))}
                     </div>
@@ -204,37 +221,58 @@ export default function Campaigns({ camps, setCamps, onNewCampaign }) {
 
                   {/* SETTINGS sub-tab */}
                   {subTab === "settings" && (
-                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+                    <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16 }}>
                       <div>
-                        <div style={{ fontSize: 15, fontWeight: 600, marginBottom: 12 }}>Параметры</div>
-                        {[
-                          { l: "Тип", v: tpLbl[c.tp] || c.tp },
-                          { l: "География", v: c.geo },
-                          { l: "Бюджет/день", v: c.b.toLocaleString() + "₽" },
-                          { l: "Режим", v: autoLbl[c.auto] },
-                        ].map((p, j) => (
-                          <div key={j} style={{ display: "flex", justifyContent: "space-between", padding: "8px 0", borderBottom: "1px solid " + C.bd }}>
-                            <span style={{ fontSize: 14, color: C.tt }}>{p.l}</span>
-                            <span style={{ fontSize: 14, fontWeight: 500 }}>{p.v}</span>
-                          </div>
-                        ))}
+                        <div style={{ fontSize: 14, fontWeight: 500, color: C.tt, marginBottom: 6 }}>БЮДЖЕТ ₽/ДЕНЬ</div>
+                        <div style={{ fontSize: 20, fontWeight: 500, marginBottom: 16 }}>{c.b.toLocaleString()}₽</div>
+                        <div style={{ fontSize: 14, fontWeight: 500, color: C.tt, marginBottom: 6 }}>ГЕО</div>
+                        <div style={{ fontSize: 16, marginBottom: 16 }}>{c.geo}</div>
+                        <div style={{ fontSize: 14, fontWeight: 500, color: C.tt, marginBottom: 6 }}>ТИП</div>
+                        <div style={{ fontSize: 16 }}>{tpLbl[c.tp] || c.tp}</div>
                       </div>
                       <div>
-                        <div style={{ fontSize: 15, fontWeight: 600, marginBottom: 12 }}>Режим автоматизации</div>
-                        {["watch", "semi", "auto"].map(a => (
-                          <button key={a} onClick={e => { e.stopPropagation(); setCamps(p => p.map(x => x.id === c.id ? { ...x, auto: a } : x)); }}
-                            style={{
-                              display: "block", width: "100%", padding: "10px 14px",
-                              borderRadius: 8, marginBottom: 8,
-                              border: "1px solid " + (c.auto === a ? C.ac : C.bd),
-                              background: c.auto === a ? C.al : C.sf,
-                              color: c.auto === a ? C.ac : C.tx,
-                              fontSize: 14, fontWeight: 500, cursor: "pointer",
-                              fontFamily: "inherit", textAlign: "left",
-                            }}>
-                            {autoLbl[a]}
+                        <div style={{ fontSize: 14, fontWeight: 500, color: C.tt, marginBottom: 6 }}>АВТОНОМИЯ АГЕНТОВ</div>
+                        <div style={{ padding: "10px 14px", borderRadius: 10, background: C.bg, marginBottom: 16 }}>
+                          {[
+                            { k: "watch", l: "👁 Наблюдение", d: "Только рекомендации" },
+                            { k: "semi", l: "⚡ Полуавтомат", d: "Мелкие действия автоматически" },
+                            { k: "auto", l: "🤖 Автопилот", d: "В рамках заданных лимитов" },
+                          ].map(o => (
+                            <div key={o.k}
+                              onClick={() => setCamps(p => p.map(x => x.id === c.id ? { ...x, auto: o.k } : x))}
+                              style={{
+                                display: "flex", alignItems: "center", gap: 8,
+                                padding: "8px 10px", borderRadius: 8, marginBottom: 4, cursor: "pointer",
+                                background: c.auto === o.k ? C.al : "transparent",
+                                border: "1px solid " + (c.auto === o.k ? C.ac : "transparent"),
+                              }}>
+                              <div style={{
+                                width: 16, height: 16, borderRadius: "50%",
+                                border: "2px solid " + (c.auto === o.k ? C.ac : C.bs),
+                                background: c.auto === o.k ? C.ac : "transparent",
+                                display: "flex", alignItems: "center", justifyContent: "center",
+                              }}>
+                                {c.auto === o.k && <div style={{ width: 6, height: 6, borderRadius: "50%", background: "#FFF" }} />}
+                              </div>
+                              <div>
+                                <div style={{ fontSize: 14, fontWeight: 500 }}>{o.l}</div>
+                                <div style={{ fontSize: 13, color: C.tt }}>{o.d}</div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        {c.s === "active" && (
+                          <button onClick={() => setCamps(p => p.map(x => x.id === c.id ? { ...x, s: "paused" } : x))}
+                            style={{ padding: "8px 14px", borderRadius: 8, border: "1px solid rgba(234,67,53,0.3)", background: "rgba(234,67,53,0.08)", color: G.r, fontSize: 14, fontWeight: 500, cursor: "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", gap: 4 }}>
+                            <Pause size={12} />Поставить на паузу
                           </button>
-                        ))}
+                        )}
+                        {c.s === "paused" && (
+                          <button onClick={() => setCamps(p => p.map(x => x.id === c.id ? { ...x, s: "active" } : x))}
+                            style={{ padding: "8px 14px", borderRadius: 8, border: "none", background: G.g, color: "#FFF", fontSize: 14, fontWeight: 500, cursor: "pointer", fontFamily: "inherit", display: "flex", alignItems: "center", gap: 4 }}>
+                            <Play size={12} />Возобновить
+                          </button>
+                        )}
                       </div>
                     </div>
                   )}
