@@ -88,7 +88,7 @@ export default function Agents() {
               }}><Icon size={22} style={{ color: a.color }} /></div>
               <div style={{ flex: 1 }}>
                 <div style={{ fontSize: 16, fontWeight: 600 }}>{a.name}</div>
-                <div style={{ fontSize: 14, color: C.tt, marginTop: 2 }}>{a.task}</div>
+                <div style={{ fontSize: 15, color: C.tt, marginTop: 2 }}>{a.task}</div>
               </div>
               <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
                 <div style={{
@@ -96,7 +96,7 @@ export default function Agents() {
                   background: a.status === "working" ? G.g : a.status === "alert" ? G.r : G.o,
                   boxShadow: "0 0 0 3px " + (a.status === "working" ? G.g : a.status === "alert" ? G.r : G.o) + "30",
                 }} />
-                <span style={{ fontSize: 14, color: C.tt }}>
+                <span style={{ fontSize: 15, color: C.tt }}>
                   {a.status === "working" ? "Работает" : a.status === "alert" ? "Внимание!" : "Ожидает"}
                 </span>
                 <ChevronRight size={16} style={{ color: C.tt, transform: selected === a.id ? "rotate(90deg)" : "none", transition: "transform 0.2s" }} />
@@ -107,7 +107,7 @@ export default function Agents() {
             <div style={{ display: "flex", gap: 6, marginTop: 10, flexWrap: "wrap" }}>
               {a.skills.map(sk => (
                 <span key={sk.id} style={{
-                  fontSize: 13, padding: "3px 8px", borderRadius: 6,
+                  fontSize: 14, padding: "3px 8px", borderRadius: 6,
                   background: sk.active ? a.bg : C.sa,
                   color: sk.active ? a.color : C.tt,
                   border: "1px solid " + (sk.active ? a.color + "30" : C.bd),
@@ -132,11 +132,11 @@ export default function Agents() {
             }}><AgIcon size={26} style={{ color: ag.color }} /></div>
             <div style={{ flex: 1 }}>
               <div style={{ fontSize: 22, fontWeight: 600 }}>{ag.name}</div>
-              <div style={{ fontSize: 15, color: C.tt }}>{ag.task}</div>
+              <div style={{ fontSize: 16, color: C.tt }}>{ag.task}</div>
             </div>
             <button onClick={() => setShowSkillModal(true)} style={{
               padding: "8px 16px", borderRadius: 10, border: "none",
-              background: "#c7623e", color: "#FFF", fontSize: 15, fontWeight: 500,
+              background: "#c7623e", color: "#FFF", fontSize: 16, fontWeight: 500,
               cursor: "pointer", fontFamily: "inherit",
               display: "flex", alignItems: "center", gap: 6,
             }}>
@@ -154,8 +154,8 @@ export default function Agents() {
                   background: sk.active ? ag.bg : C.sa,
                   border: "1px solid " + (sk.active ? ag.color + "30" : C.bd),
                 }}>
-                  <div style={{ fontSize: 15, fontWeight: 500, color: sk.active ? ag.color : C.tx }}>{sk.name}</div>
-                  <div style={{ fontSize: 14, color: C.tt, marginTop: 3 }}>{sk.desc}</div>
+                  <div style={{ fontSize: 16, fontWeight: 500, color: sk.active ? ag.color : C.tx }}>{sk.name}</div>
+                  <div style={{ fontSize: 15, color: C.tt, marginTop: 3 }}>{sk.desc}</div>
                 </div>
               ))}
             </div>
@@ -170,8 +170,8 @@ export default function Agents() {
                   {l.ok ? <CheckCircle size={13} style={{ color: G.g }} /> : <AlertTriangle size={13} style={{ color: G.r }} />}
                 </div>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontSize: 15, color: C.ts }}>{l.msg}</div>
-                  <div style={{ fontSize: 14, color: C.tt, marginTop: 2 }}>{l.t}</div>
+                  <div style={{ fontSize: 16, color: C.ts }}>{l.msg}</div>
+                  <div style={{ fontSize: 15, color: C.tt, marginTop: 2 }}>{l.t}</div>
                 </div>
               </div>
             ))}
@@ -211,11 +211,11 @@ export default function Agents() {
             <div style={{ display: "flex", justifyContent: "flex-end", gap: 8, marginTop: 16 }}>
               <button onClick={() => setShowSkillModal(false)} style={{
                 padding: "8px 16px", borderRadius: 8, border: "1px solid " + C.bd,
-                background: C.sf, color: C.tx, fontSize: 15, cursor: "pointer", fontFamily: "inherit",
+                background: C.sf, color: C.tx, fontSize: 16, cursor: "pointer", fontFamily: "inherit",
               }}>Отмена</button>
               <button onClick={() => setShowSkillModal(false)} style={{
                 padding: "8px 16px", borderRadius: 8, border: "none",
-                background: "#c7623e", color: "#FFF", fontSize: 15, fontWeight: 500,
+                background: "#c7623e", color: "#FFF", fontSize: 16, fontWeight: 500,
                 cursor: "pointer", fontFamily: "inherit",
               }}>Загрузить</button>
             </div>
