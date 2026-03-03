@@ -48,8 +48,10 @@ export default function RightPanel() {
 
   return (
     <div style={{
-      width: 520, borderLeft: "1px solid " + C.bd,
+      width: 380, borderLeft: "1px solid " + C.bd,
       display: "flex", flexDirection: "column", background: C.sf,
+      boxShadow: "-8px 0 32px rgba(60,40,20,0.08), -2px 0 8px rgba(60,40,20,0.04)",
+      zIndex: 10, position: "relative",
     }}>
       {/* Alerts */}
       <div style={{ padding: "16px 20px", borderBottom: "1px solid " + C.bd }}>
@@ -146,28 +148,31 @@ export default function RightPanel() {
         </div>
 
         {/* Input */}
-        <div style={{ padding: "10px 14px 14px" }}>
+        <div style={{ padding: "12px 16px 16px" }}>
           <div style={{
-            border: "1px solid " + C.bs, borderRadius: 22,
+            border: "1px solid " + C.bs, borderRadius: 20,
             background: C.sf, overflow: "hidden",
+            boxShadow: "0 2px 12px rgba(60,40,20,0.08), 0 0 0 1px rgba(60,40,20,0.04)",
           }}>
-            <div style={{ display: "flex", alignItems: "center", padding: "10px 8px 6px 18px" }}>
-              <input value={input} onChange={e => setInput(e.target.value)}
-                onKeyDown={e => e.key === "Enter" && send()}
+            <div style={{ padding: "14px 14px 8px 18px" }}>
+              <textarea value={input} onChange={e => setInput(e.target.value)}
+                onKeyDown={e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); send(); } }}
                 placeholder="Спросите агентов..."
+                rows={3}
                 style={{
-                  flex: 1, border: "none", background: "transparent",
+                  width: "100%", border: "none", background: "transparent", resize: "none",
                   color: C.tx, fontSize: 14, outline: "none", fontFamily: "inherit",
+                  lineHeight: 1.5, minHeight: 60,
                 }}
               />
             </div>
             <div style={{
               display: "flex", alignItems: "center", justifyContent: "space-between",
-              padding: "2px 8px 8px 18px",
+              padding: "4px 14px 12px 18px",
             }}>
               <span style={{ fontSize: 11, color: C.tt }}>CPA · бюджет · объявления · скиллы · агенты</span>
               <button onClick={send} style={{
-                width: 32, height: 32, borderRadius: 10, border: "none",
+                width: 34, height: 34, borderRadius: 12, border: "none",
                 background: input.trim() ? "#c7623e" : "rgba(199,98,62,0.15)",
                 display: "flex", alignItems: "center", justifyContent: "center",
                 cursor: input.trim() ? "pointer" : "default",
