@@ -24,8 +24,8 @@ export default function Header({ tab, setTab }) {
           </svg>
         </div>
         <div>
-          <div style={{ fontSize: 17, fontWeight: 600 }}>Agent XXL</div>
-          <div style={{ fontSize: 12, color: C.tt }}>Google Ads · Мультиагентная система</div>
+          <div style={{ fontSize: 19, fontWeight: 600 }}>Agent XXL</div>
+          <div style={{ fontSize: 14, color: C.tt }}>Google Ads · Мультиагентная система</div>
         </div>
       </div>
 
@@ -33,7 +33,7 @@ export default function Header({ tab, setTab }) {
         {["overview", "campaigns", "agents"].map(t => (
           <button key={t} onClick={() => setTab(t)} style={{
             padding: "7px 18px", borderRadius: 10, border: "none",
-            cursor: "pointer", fontSize: 13, fontWeight: 500, fontFamily: "inherit",
+            cursor: "pointer", fontSize: 15, fontWeight: 500, fontFamily: "inherit",
             background: tab === t ? C.al : "transparent",
             color: tab === t ? C.ac : C.tx,
           }}>
@@ -42,7 +42,7 @@ export default function Header({ tab, setTab }) {
         ))}
         <div style={{ width: 1, height: 24, background: C.bd, margin: "0 10px" }} />
         <div style={{
-          padding: "6px 14px", borderRadius: 20, fontSize: 12, fontWeight: 500,
+          padding: "6px 14px", borderRadius: 20, fontSize: 14, fontWeight: 500,
           background: "rgba(52,168,83,0.08)", color: "#34A853",
           display: "flex", alignItems: "center", gap: 6,
         }}>

@@ -64,10 +64,10 @@ export default function RightPanel() {
           }}>
             <Sparkles size={14} style={{ color: "#FFF" }} />
           </div>
-          <span style={{ fontSize: 14, fontWeight: 600 }}>Рекомендации</span>
+          <span style={{ fontSize: 16, fontWeight: 600 }}>Рекомендации</span>
           <Chevron open={alertsOpen} />
           <span style={{
-            fontSize: 11, fontWeight: 500, padding: "2px 9px", borderRadius: 10,
+            fontSize: 13, fontWeight: 500, padding: "2px 9px", borderRadius: 10,
             background: "rgba(234,67,53,0.08)", color: "#EA4335", marginLeft: "auto",
           }}>2</span>
         </div>
@@ -81,13 +81,13 @@ export default function RightPanel() {
               }}>
                 <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
                   <Badge agent={al.ag} />
-                  <span style={{ fontSize: 11, color: C.tt, marginLeft: "auto" }}>
+                  <span style={{ fontSize: 13, color: C.tt, marginLeft: "auto" }}>
                     <Clock size={10} style={{ marginRight: 3 }} />{al.tm}
                   </span>
                 </div>
-                <div style={{ fontSize: 12, color: C.ts, lineHeight: 1.5, marginBottom: 10 }}>{al.msg}</div>
+                <div style={{ fontSize: 14, color: C.ts, lineHeight: 1.5, marginBottom: 10 }}>{al.msg}</div>
                 <button style={{
-                  padding: "6px 12px", borderRadius: 8, fontSize: 11, fontWeight: 500,
+                  padding: "6px 12px", borderRadius: 8, fontSize: 13, fontWeight: 500,
                   cursor: "pointer", fontFamily: "inherit",
                   background: C.al, color: C.ac, border: "1px solid " + C.am,
                   display: "flex", alignItems: "center", gap: 4,
@@ -113,7 +113,7 @@ export default function RightPanel() {
           }}>
             <Bot size={15} style={{ color: "#FFF" }} />
           </div>
-          <span style={{ fontSize: 14, fontWeight: 600 }}>Чат с ассистентом</span>
+          <span style={{ fontSize: 16, fontWeight: 600 }}>Чат с ассистентом</span>
         </div>
 
         <div ref={chatRef} style={{
@@ -128,7 +128,7 @@ export default function RightPanel() {
               borderRadius: m.r === "u" ? "14px 14px 4px 14px" : "14px 14px 14px 4px",
               background: m.r === "u" ? "linear-gradient(135deg,#C47B5B,#D4A574)" : C.bg,
               border: m.r === "u" ? "none" : "1px solid " + C.bd,
-              fontSize: 13, lineHeight: 1.6, whiteSpace: "pre-wrap",
+              fontSize: 15, lineHeight: 1.6, whiteSpace: "pre-wrap",
               color: m.r === "u" ? "#FFF" : C.tx,
               animation: "fadeIn 0.3s ease-out",
             }}>{m.t}</div>
@@ -138,7 +138,7 @@ export default function RightPanel() {
               alignSelf: "flex-start", padding: "10px 16px",
               borderRadius: "14px 14px 14px 4px",
               background: C.bg, border: "1px solid " + C.bd,
-              fontSize: 13, color: C.tt,
+              fontSize: 15, color: C.tt,
               display: "flex", alignItems: "center", gap: 8,
             }}>
               <RefreshCw size={14} style={{ animation: "spin 1s linear infinite", color: C.ac }} />
@@ -161,7 +161,7 @@ export default function RightPanel() {
                 rows={3}
                 style={{
                   width: "100%", border: "none", background: "transparent", resize: "none",
-                  color: C.tx, fontSize: 14, outline: "none", fontFamily: "inherit",
+                  color: C.tx, fontSize: 16, outline: "none", fontFamily: "inherit",
                   lineHeight: 1.5, minHeight: 60,
                 }}
               />
@@ -170,7 +170,7 @@ export default function RightPanel() {
               display: "flex", alignItems: "center", justifyContent: "space-between",
               padding: "4px 14px 12px 18px",
             }}>
-              <span style={{ fontSize: 11, color: C.tt }}>CPA · бюджет · объявления · скиллы · агенты</span>
+              <span style={{ fontSize: 13, color: C.tt }}>CPA · бюджет · объявления · скиллы · агенты</span>
               <button onClick={send} style={{
                 width: 34, height: 34, borderRadius: 12, border: "none",
                 background: input.trim() ? "#c7623e" : "rgba(199,98,62,0.15)",
